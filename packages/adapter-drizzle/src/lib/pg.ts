@@ -134,7 +134,7 @@ export function PostgresDrizzleAdapter(
   } = defineTables(schema)
 
   return {
-    async createUser(data: AdapterUser) {
+    async createUser(data: Omit<AdapterUser, "id">) {
       const { id, ...insertData } = data
       const hasDefaultId = getTableColumns(usersTable)["id"]["hasDefault"]
 
@@ -516,7 +516,7 @@ export type DefaultPostgresAuthenticatorTable = PgTableWithColumns<{
       dataType: "string"
     }>
     userId: DefaultPostgresColumn<{
-      columnType: "PgVarchar" | "PgText"
+      columnType: "PgVarchar" | "PgText" | "PgUUID"
       data: string
       notNull: true
       dataType: "string"

@@ -133,7 +133,7 @@ export function SQLiteDrizzleAdapter(
   } = defineTables(schema)
 
   return {
-    async createUser(data: AdapterUser) {
+    async createUser(data: Omit<AdapterUser, "id">) {
       const { id, ...insertData } = data
       const hasDefaultId = getTableColumns(usersTable)["id"]["hasDefault"]
 
